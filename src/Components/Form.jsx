@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect,  useState } from 'react';
 
 const Form = ({ editUser, addUsers, updateUser }) => {
   const [input, setInput] = useState({
@@ -7,7 +7,7 @@ const Form = ({ editUser, addUsers, updateUser }) => {
 
   const [errors, setErrors] = useState({});
 
-  const formref = useRef(null)
+  
 
   useEffect(() => {
     if (editUser) {
@@ -71,10 +71,10 @@ const Form = ({ editUser, addUsers, updateUser }) => {
   };
 
   return (
-    <div className='container mx-auto my-4'>
+    <div className='container mx-auto my-4  '>
       <h1 className='text-3xl text-center font-semibold my-12'>Form Validation</h1>
 
-      <form ref={formref} onSubmit={handleSubmit} className="max-w-sm mx-auto">
+      <form  onSubmit={handleSubmit} className="max-w-sm mx-auto">
 
         <div className="mb-5">
           <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">Your Name</label>
@@ -99,11 +99,9 @@ const Form = ({ editUser, addUsers, updateUser }) => {
           <label htmlFor="course" className="block mb-2 text-sm font-medium text-gray-900">Select Course</label>
           <select
             onChange={handleChange}
-            value={input.course}
-            id="course"
-            className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-          >
-            <option value="">Select Course</option>
+            value={input.course} id="course"
+            className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+            <option value="">--Select Course--</option>
             <option value="1">Full Stack Development</option>
             <option value="2">Marketing</option>
             <option value="3">UI / UX</option>
@@ -112,7 +110,7 @@ const Form = ({ editUser, addUsers, updateUser }) => {
           {errors.course && <p className="text-red-500 text-sm mt-1">{errors.course}</p>}
         </div>
 
-        {/* Gender */}
+       
         <div className="flex gap-4 mb-4">
           <label className="flex items-center gap-2 text-gray-900">
             <input
@@ -168,11 +166,8 @@ const Form = ({ editUser, addUsers, updateUser }) => {
         </div>
 
        
-        <button
-          type="submit"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5"
-        >
-          Submit
+        <button type="submit"  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5" >
+          {editUser ?"Update" : "Submit"}
         </button>
       </form>
     </div>
