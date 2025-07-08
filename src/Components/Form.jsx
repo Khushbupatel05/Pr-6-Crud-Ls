@@ -1,4 +1,4 @@
-import React, { useEffect,  useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Form = ({ editUser, addUsers, updateUser }) => {
   const [input, setInput] = useState({
@@ -6,8 +6,6 @@ const Form = ({ editUser, addUsers, updateUser }) => {
   });
 
   const [errors, setErrors] = useState({});
-
-  
 
   useEffect(() => {
     if (editUser) {
@@ -26,7 +24,6 @@ const Form = ({ editUser, addUsers, updateUser }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     let validationErrors = {};
 
     if (input.name.trim() === "") {
@@ -54,7 +51,6 @@ const Form = ({ editUser, addUsers, updateUser }) => {
     }
 
     setErrors(validationErrors);
-
     if (Object.keys(validationErrors).length > 0) return;
 
     if (editUser) {
@@ -66,110 +62,145 @@ const Form = ({ editUser, addUsers, updateUser }) => {
     setInput({
       name: '', email: '', course: '', gender: '', password: '', confirmPassword: '',
     });
-
     setErrors({});
   };
 
   return (
-    <div className='container mx-auto my-4  '>
-      <h1 className='text-3xl text-center font-semibold my-12'>Form Validation</h1>
+    <div className='min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-white to-blue-200 p-4'>
 
-      <form  onSubmit={handleSubmit} className="max-w-sm mx-auto">
+      
+      <div className='bg-white shadow-xl rounded-2xl p-8  max-w-lg flex'>
 
-        <div className="mb-5">
-          <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">Your Name</label>
-          <input onChange={handleChange} value={input.name} type="text" id="name"  className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"   placeholder="Name"  />
-          {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
-        </div>
-
- 
-        <div className="mb-5">
-          <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Your Email</label>
-          <input
-            onChange={handleChange}
-            value={input.email}
-            type="email"
-            id="email"
-            className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-            placeholder="Email" />
-          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
-        </div>
-
-        <div className="mb-5">
-          <label htmlFor="course" className="block mb-2 text-sm font-medium text-gray-900">Select Course</label>
-          <select
-            onChange={handleChange}
-            value={input.course} id="course"
-            className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-            <option value="">--Select Course--</option>
-            <option value="1">Full Stack Development</option>
-            <option value="2">Marketing</option>
-            <option value="3">UI / UX</option>
-            <option value="4">AI / ML</option>
-          </select>
-          {errors.course && <p className="text-red-500 text-sm mt-1">{errors.course}</p>}
-        </div>
-
-       
-        <div className="flex gap-4 mb-4">
-          <label className="flex items-center gap-2 text-gray-900">
-            <input
-              type="radio"
-              id="gender"
-              name="gender"
-              value="Male"
-              onChange={handleChange}
-              checked={input.gender === "Male"}
-            />
-            Male
-          </label>
-          <label className="flex items-center gap-2 text-gray-900">
-            <input
-              type="radio"
-              id="gender"
-              name="gender"
-              value="Female"
-              onChange={handleChange}
-              checked={input.gender === "Female"}
-            />
-            Female
-          </label>
-        </div>
-        {errors.gender && <p className="text-red-500 text-sm mb-4">{errors.gender}</p>}
-
-        
-        <div className="mb-5">
-          <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Your Password</label>
-          <input
-            onChange={handleChange}
-            value={input.password}
-            type="password"
-            id="password"
-            className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-            placeholder="Password"
+         <div className="flex justify-center mb-6">
+          <img
+            src="/img/proffessional.png"
+            alt="Professional"
+            className="w-32 h-32 md:w-40 md:h-40 object-contain"
           />
-          {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
         </div>
 
-       
-        <div className="mb-5">
-          <label htmlFor="confirmPassword" className="block mb-2 text-sm font-medium text-gray-900">Repeat Password</label>
-          <input
-            onChange={handleChange}
-            value={input.confirmPassword}
-            type="password"
-            id="confirmPassword"
-            className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-            placeholder="Confirm Password"
-          />
-          {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword}</p>}
-        </div>
+        <h2 className='text-3xl font-bold text-center text-blue-800 mb-4'>
+          {editUser ? 'Update User Info' : 'User Registration'}
+        </h2>
 
+        {/* Responsive Image */}
        
-        <button type="submit"  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5" >
-          {editUser ?"Update" : "Submit"}
-        </button>
-      </form>
+
+        <form onSubmit={handleSubmit} className='space-y-6'>
+
+          {/* Name */}
+          <div>
+            <label htmlFor="name" className="block mb-1 font-medium">Name</label>
+            <input
+              onChange={handleChange}
+              value={input.name}
+              type="text"
+              id="name"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your name"
+            />
+            {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+          </div>
+
+          {/* Email */}
+          <div>
+            <label htmlFor="email" className="block mb-1 font-medium">Email</label>
+            <input
+              onChange={handleChange}
+              value={input.email}
+              type="email"
+              id="email"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your email"
+            />
+            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+          </div>
+
+          {/* Course */}
+          <div>
+            <label htmlFor="course" className="block mb-1 font-medium">Course</label>
+            <select
+              onChange={handleChange}
+              value={input.course}
+              id="course"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">-- Select Course --</option>
+              <option value="1">Full Stack Development</option>
+              <option value="2">Marketing</option>
+              <option value="3">UI / UX</option>
+              <option value="4">AI / ML</option>
+            </select>
+            {errors.course && <p className="text-red-500 text-sm mt-1">{errors.course}</p>}
+          </div>
+
+          {/* Gender */}
+          <div>
+            <label className="block mb-1 font-medium">Gender</label>
+            <div className="flex items-center gap-6">
+              <label className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  id="gender"
+                  name="gender"
+                  value="Male"
+                  onChange={handleChange}
+                  checked={input.gender === "Male"}
+                />
+                Male
+              </label>
+              <label className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  id="gender"
+                  name="gender"
+                  value="Female"
+                  onChange={handleChange}
+                  checked={input.gender === "Female"}
+                />
+                Female
+              </label>
+            </div>
+            {errors.gender && <p className="text-red-500 text-sm mt-1">{errors.gender}</p>}
+          </div>
+
+          {/* Password */}
+          <div>
+            <label htmlFor="password" className="block mb-1 font-medium">Password</label>
+            <input
+              onChange={handleChange}
+              value={input.password}
+              type="password"
+              id="password"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Password"
+            />
+            {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
+          </div>
+
+          {/* Confirm Password */}
+          <div>
+            <label htmlFor="confirmPassword" className="block mb-1 font-medium">Confirm Password</label>
+            <input
+              onChange={handleChange}
+              value={input.confirmPassword}
+              type="password"
+              id="confirmPassword"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Repeat your password"
+            />
+            {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword}</p>}
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition"
+          >
+            {editUser ? "Update" : "Submit"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
