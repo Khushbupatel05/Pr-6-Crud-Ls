@@ -10,7 +10,7 @@ const UserList = ({ users, deleteUser, getEditUser }) => {
   };
 
   return (
-    <div className="min-h-screen py-10 px-4 flex flex-col items-center">
+    <div className="min-h-screen py-10 px-4 flex flex-col items-center ">
       <div className="bg-white shadow-2xl rounded-2xl w-full max-w-6xl p-6">
 
         <h2 className="text-2xl font-bold text-center text-purple-900 mb-6">
